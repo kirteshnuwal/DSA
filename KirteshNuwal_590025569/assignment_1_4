@@ -1,0 +1,77 @@
+//4.	Write a C program to dynamically allocate memory for a 2D matrix and perform matrix addition and subtraction.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int rows, cols;
+
+    printf("Enter number of rows: ");
+    scanf("%d", &rows);
+
+    printf("Enter number of columns: ");
+    scanf("%d", &cols);
+
+    int **A = (int **)malloc(rows * sizeof(int *));
+    int **B = (int **)malloc(rows * sizeof(int *));
+    int **Sum = (int **)malloc(rows * sizeof(int *));
+    int **Diff = (int **)malloc(rows * sizeof(int *));
+
+    for (int i = 0; i < rows; i++) {
+        A[i] = (int *)malloc(cols * sizeof(int));
+        B[i] = (int *)malloc(cols * sizeof(int));
+        Sum[i] = (int *)malloc(cols * sizeof(int));
+        Diff[i] = (int *)malloc(cols * sizeof(int));
+    }
+
+    printf("\nEnter elements of Matrix A:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%d", &A[i][j]);
+        }
+    }
+
+    printf("\nEnter elements of Matrix B:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%d", &B[i][j]);
+        }
+    }
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            Sum[i][j] = A[i][j] + B[i][j];
+            Diff[i][j] = A[i][j] - B[i][j];
+        }
+    }
+
+    printf("\nMatrix Addition Result:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d ", Sum[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\nMatrix Subtraction Result:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d ", Diff[i][j]);
+        }
+        printf("\n");
+    }
+
+    for (int i = 0; i < rows; i++) {
+        free(A[i]);
+        free(B[i]);
+        free(Sum[i]);
+        free(Diff[i]);
+    }
+
+    free(A);
+    free(B);
+    free(Sum);
+    free(Diff);
+
+    return 0;
+}
